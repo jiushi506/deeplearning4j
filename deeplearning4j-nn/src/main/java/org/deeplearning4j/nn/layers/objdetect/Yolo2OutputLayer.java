@@ -91,6 +91,7 @@ public class Yolo2OutputLayer extends AbstractLayer<org.deeplearning4j.nn.conf.l
     }
 
     private INDArray computeBackpropGradientAndScore(){
+        INDArray input = this.input.get(0);
 
         double lambdaCoord = layerConf().getLambdaCoord();
         double lambdaNoObj = layerConf().getLambdaNoObj();
@@ -324,6 +325,7 @@ public class Yolo2OutputLayer extends AbstractLayer<org.deeplearning4j.nn.conf.l
 
     @Override
     public Activations activate(boolean training) {
+        INDArray input = this.input.get(0);
         //Essentially: just apply activation functions...
 
         int mb = input.size(0);
