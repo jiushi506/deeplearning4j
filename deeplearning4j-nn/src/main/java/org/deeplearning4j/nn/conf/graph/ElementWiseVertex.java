@@ -116,9 +116,9 @@ public class ElementWiseVertex extends GraphVertex {
     }
 
     @Override
-    public InputType getOutputType(int layerIndex, InputType... vertexInputs) throws InvalidInputTypeException {
+    public InputType[] getOutputType(int layerIndex, InputType... vertexInputs) throws InvalidInputTypeException {
         if (vertexInputs.length == 1)
-            return vertexInputs[0];
+            return vertexInputs;
         InputType first = vertexInputs[0];
         if (first.getType() != InputType.Type.CNN) {
             //FF, RNN or flat CNN data inputs
@@ -159,7 +159,7 @@ public class ElementWiseVertex extends GraphVertex {
                 }
             }
         }
-        return first; //Same output shape/size as
+        return new InputType[]{first}; //Same output shape/size as
     }
 
     @Override
