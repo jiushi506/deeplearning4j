@@ -109,7 +109,7 @@ public class TestYolo2OutputLayer {
         labels.putScalar(2, 3, 2, 2, 6);
 
         y2impl.setInput(af.create(input));
-        y2impl.setLabels(labels);
+        y2impl.setLabels(labels, null);
         double score = y2impl.computeScore(0, 0, true);
 
         System.out.println("SCORE: " + score);
@@ -121,7 +121,7 @@ public class TestYolo2OutputLayer {
 
         y2impl = (org.deeplearning4j.nn.layers.objdetect.Yolo2OutputLayer) netLoaded.getLayer(1);
         y2impl.setInput(af.create(input));
-        y2impl.setLabels(labels);
+        y2impl.setLabels(labels, null);
         double score2 = y2impl.computeScore(0, 0, true);
 
         assertEquals(score, score2, 1e-8);
