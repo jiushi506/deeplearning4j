@@ -44,6 +44,8 @@ import static org.nd4j.linalg.indexing.NDArrayIndex.*;
 
 public class TestYolo2OutputLayer {
 
+    private static final ActivationsFactory af = ActivationsFactory.getInstance();
+
     @Test
     public void testYoloActivateScoreBasic() throws Exception {
 
@@ -106,7 +108,7 @@ public class TestYolo2OutputLayer {
         labels.putScalar(2, 2, 2, 2, 6);
         labels.putScalar(2, 3, 2, 2, 6);
 
-        y2impl.setInput(input);
+        y2impl.setInput(af.create(input));
         y2impl.setLabels(labels);
         double score = y2impl.computeScore(0, 0, true);
 
@@ -118,7 +120,7 @@ public class TestYolo2OutputLayer {
         MultiLayerNetwork netLoaded = TestUtils.testModelSerialization(net);
 
         y2impl = (org.deeplearning4j.nn.layers.objdetect.Yolo2OutputLayer) netLoaded.getLayer(1);
-        y2impl.setInput(input);
+        y2impl.setInput(af.create(input));
         y2impl.setLabels(labels);
         double score2 = y2impl.computeScore(0, 0, true);
 
